@@ -4,6 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include <cstring>
+#include <cstdint>
 
 
 using namespace std;
@@ -47,7 +48,7 @@ string clear_string(string &str)
 pair<string, string> Config::get_pair(string &str, char delimiter='=')
 {
 	pair<string, string> key_value;
-	u_int8_t size_str;
+	uint_fast8_t size_str;
 	if (str.length() < 255)
 	{
 		size_str = str.length();
@@ -56,7 +57,7 @@ pair<string, string> Config::get_pair(string &str, char delimiter='=')
 	{
 		size_str = 255;
 	}
-	u_int8_t pos_delimiter = str.find(delimiter);
+	uint_fast8_t pos_delimiter = str.find(delimiter);
 	if ((pos_delimiter == 255) || pos_delimiter == 0)
 	{
 		string error = "get_pair: Error in enter Parametr!";

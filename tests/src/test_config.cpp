@@ -8,7 +8,7 @@
 
 using namespace std;
 
-string FILE_NAME = "/home/hacker/Projects/Cpp/comet/tests/test_config/config.cfg";
+string FILE_NAME = "../files/config.cfg";
 
 string DEFAULT_CONFIG_ERR =
 		"name=DEFAULT_CONFIG_ERR\n"

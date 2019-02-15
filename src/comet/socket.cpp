@@ -28,7 +28,7 @@ ServerSocket::~ServerSocket() noexcept {}
 
 void ServerSocket::bind(string address, int port)
 {
-	int result;
+	int_fast8_t result;
 	this->server_addr.sin_port = htons(port);
 	this->server_addr.sin_addr.s_addr = inet_addr(address.c_str());
 	result = sys_bind(this->socket_fd, (sockaddr *)&this->server_addr, sizeof(this->server_addr));
@@ -42,7 +42,7 @@ void ServerSocket::bind(string address, int port)
 
 void ServerSocket::listen(int backlog)
 {
-	int result;
+	int_fast8_t result;
 	result = sys_listen(this->socket_fd, backlog);
 	if (result < 0)
 	{
@@ -54,7 +54,7 @@ void ServerSocket::listen(int backlog)
 
 ServerSocket ServerSocket::accept()
 {
-	int result;
+	int_fast8_t result;
 	sockaddr_in client_addr;\
 	result = sys_accept(this->socket_fd, (sockaddr *)&client_addr, sizeof(client_addr));
 	if (result < 0)
@@ -75,7 +75,7 @@ ServerSocket ServerSocket::accept()
 
 void ServerSocket::nonblock()
 {
-	int result;
+	int_fast8_t result;
 	result = fcntl(this->socket_fd, O_NONBLOCK);
 	if (result < 0) {
 		stringstream error;
@@ -86,7 +86,7 @@ void ServerSocket::nonblock()
 
 int ServerSocket::send(string message)
 {
-	int result;
+	int_fast8_t result;
 	int total;
 	int len = message.length();
 	while (total < len)
@@ -203,7 +203,7 @@ ClientSocket::~ClientSocket() noexcept {}
 
 void ClientSocket::connect(string address, int port)
 {
-	int result;
+	int_fast8_t result;
 	this->client_addr.sin_port = htons(port);
 	this->client_addr.sin_addr.s_addr = inet_addr(address.c_str());
 	result = sys_connect(this->socket_fd, (sockaddr *)&client_addr, sizeof(this->client_addr));
@@ -217,7 +217,7 @@ void ClientSocket::connect(string address, int port)
 
 void ClientSocket::nonblock()
 {
-	int result;
+	int_fast8_t result;
 	result = fcntl(this->socket_fd, O_NONBLOCK);
 	if (result < 0) {
 		stringstream error;
@@ -228,7 +228,7 @@ void ClientSocket::nonblock()
 
 int ClientSocket::send(string message)
 {
-	int result;
+	int_fast8_t result;
 	int total;
 	int len = message.length();
 	while (total < len)

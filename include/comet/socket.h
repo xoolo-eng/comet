@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string>
+#include <cstdint>
 
 #define PACK_SIZE 1300
 
@@ -65,36 +66,36 @@ typedef ClientSocket c_socket_t;
 /*
  * Пересмотреть реализацию презгрузки системных функций
  */
-int sys_bind(int sockfd, struct sockaddr *addr, int addrlen)
+int_fast8_t sys_bind(int sockfd, struct sockaddr *addr, int addrlen)
 {
 	return bind(sockfd, addr, addrlen);
 }
 
-int sys_listen(int sockfd, int backlog)
+int_fast8_t sys_listen(int sockfd, int backlog)
 {
 	return listen(sockfd, backlog);
 }
 
-int sys_accept(int sockfd, void *addr, socklen_t addrlen)
+int_fast8_t sys_accept(int sockfd, void *addr, socklen_t addrlen)
 {
 	return accept(sockfd, (sockaddr *)addr, &addrlen);
 }
 
-int sys_send(int sockfd, const void *msg, int len, int flags)
+int_fast8_t sys_send(int sockfd, const void *msg, int len, int flags)
 {
 	return send(sockfd, msg, len, flags);
 }
 
-int sys_recv(int sockfd, void *buf, int len, int flags)
+int_fast8_t sys_recv(int sockfd, void *buf, int len, int flags)
 {
 	return recv(sockfd, buf, len, flags);
 }
 
-int sys_close(int fildes) {
+int_fast8_t sys_close(int fildes) {
 	return close(fildes);
 }
 
-int sys_connect(int sockfd, struct sockaddr *serv_addr, int addrlen)
+int_fast8_t sys_connect(int sockfd, struct sockaddr *serv_addr, int addrlen)
 {
 	return connect(sockfd, serv_addr, addrlen);
 }
