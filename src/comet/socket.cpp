@@ -87,7 +87,7 @@ void ServerSocket::nonblock()
 int ServerSocket::send(string message)
 {
 	int_fast8_t result;
-	int total;
+	int total = 0;
 	int len = message.length();
 	while (total < len)
 	{
@@ -229,7 +229,7 @@ void ClientSocket::nonblock()
 int ClientSocket::send(string message)
 {
 	int_fast8_t result;
-	int total;
+	int total = 0;
 	int len = message.length();
 	while (total < len)
 	{
