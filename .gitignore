@@ -36,3 +36,4 @@ Makefile
 .qmake.stash
 bin/
 obj/
+build/
