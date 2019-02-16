@@ -34,6 +34,7 @@
 # Other
 Makefile
 .qmake.stash
+*.pro*
 bin/
 obj/
 build/

@@ -212,4 +212,3 @@ int main()
 	test_4(config);
 	return 0;
 }
-

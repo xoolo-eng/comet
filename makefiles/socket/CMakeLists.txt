@@ -15,4 +15,4 @@ set ( socket_SRCS
 	)
 include_directories(../../include)
 add_library ( socket SHARED ${socket_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( socket )git clean -d -ngit clean -d -n
+target_link_libraries ( socket )
