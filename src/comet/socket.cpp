@@ -31,7 +31,9 @@ void ServerSocket::bind(string address, int port)
 	int_fast8_t result;
 	this->server_addr.sin_port = htons(port);
 	this->server_addr.sin_addr.s_addr = inet_addr(address.c_str());
-	result = sys_bind(this->socket_fd, (sockaddr *)&this->server_addr, sizeof(this->server_addr));
+	result = sys_bind(
+			this->socket_fd, (sockaddr *)&this->server_addr,
+			sizeof(this->server_addr));
 	if (result < 0)
 	{
 		stringstream error;
@@ -300,4 +302,3 @@ ClientSocket::operator bool() const
 //Socket::Socket() {
 
 //}
-

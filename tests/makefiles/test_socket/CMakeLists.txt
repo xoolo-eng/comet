@@ -4,7 +4,7 @@ set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC ON )
 set( CMAKE_BUILD_TYPE Release )
 add_definitions ( -Wall )
-set ( EXECUTABLE_OUTPUT_PATH bin )
+set ( EXECUTABLE_OUTPUT_PATH ../../bin )
 set ( test_socket_HDRS
 
 	)

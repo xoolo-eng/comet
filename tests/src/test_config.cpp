@@ -8,23 +8,23 @@
 
 using namespace std;
 
-string FILE_NAME = "../files/config.cfg";
+string FILE_NAME = "config.cfg";
 
 string DEFAULT_CONFIG_ERR =
 		"name=DEFAULT_CONFIG_ERR\n"
-		"listen_address = 192.168.0.88\n"
+		"listen_address = 192.168.42.144\n"
 		"error string\n"
 		"not value=\n";
 
 string CONFIG_FILE_ERR =
 		"name=CONFIG_FILE_ERR\n"
-		"listen_address = 192.168.0.99\n"
+		"listen_address = 192.168.42.145\n"
 		"error string file\n"
 		"not value file=\n";
 
 string DEFAULT_CONFIG =
 		"name=DEFAULT_CONFIG\n"
-		"listen_address= 192.168.0.88\n"
+		"listen_address= 192.168.42.144\n"
 		"error_string file=error1\n"
 		"TEST = DEFAULT\n"
 		"not_value_file=line\n";
@@ -32,7 +32,7 @@ string DEFAULT_CONFIG =
 string CONFIG_FILE =
 		"name = CONFIG_FILE\n"
 		"#line=error\n"
-		"listen_address = 192.168.0.99\n"
+		"listen_address = 192.168.42.145\n"
 		"\n"
 		"error_string_file=error2\n"
 		"not_value_file=line\n";
