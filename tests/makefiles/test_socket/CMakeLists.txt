@@ -12,7 +12,7 @@ set ( test_socket_HDRS
 set ( test_socket_SRCS
 	../../src/test_socket.cpp
 	)
-	nclude_directories( ../../../include )
-	link_directories( ../../../lib )
+include_directories( ../../../include )
+link_directories( ../../../lib )
 add_executable ( test_socket ${test_socket_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
 target_link_libraries ( test_socket socket )

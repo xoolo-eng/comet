@@ -15,9 +15,10 @@ class ServerSocket
 {
 	public:
 		ServerSocket();
+		ServerSocket(int domain, __socket_type type);
 		ServerSocket(int domain, __socket_type type, int protocol);
 		~ServerSocket() noexcept;
-		void bind(std::string address, int post);
+		void bind(std::string address, short post);
 		void listen(int backlog);
 		ServerSocket accept();
 		void nonblock();

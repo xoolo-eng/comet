@@ -9,9 +9,17 @@
 using namespace std;
 
 
-ServerSocket::ServerSocket() : connect (false), created (false) {}
+ServerSocket::ServerSocket() :
+connect (false),
+created (false)
+{}
 
-ServerSocket::ServerSocket(int domain, __socket_type type, int protocol)
+ServerSocket::ServerSocket(int domain, __socket_type type) :
+ServerSocket(domain, type, 0)
+{}
+
+ServerSocket::ServerSocket(int domain, __socket_type type, int protocol) :
+connect (false)
 {
 	this->socket_fd = socket(domain, type, protocol);
 	if (this->socket_fd < 0)
@@ -26,7 +34,7 @@ ServerSocket::ServerSocket(int domain, __socket_type type, int protocol)
 
 ServerSocket::~ServerSocket() noexcept {}
 
-void ServerSocket::bind(string address, int port)
+void ServerSocket::bind(string address, short port)
 {
 	int_fast8_t result;
 	this->server_addr.sin_port = htons(port);
