@@ -6,6 +6,8 @@
 #include <cstring>
 #include <cerrno>
 
+#include <iostream>
+
 using namespace std;
 
 
@@ -19,7 +21,8 @@ ServerSocket(domain, type, 0)
 {}
 
 ServerSocket::ServerSocket(int domain, __socket_type type, int protocol) :
-connect (false)
+connect (false),
+created (true)
 {
 	this->socket_fd = socket(domain, type, protocol);
 	if (this->socket_fd < 0)
@@ -29,7 +32,6 @@ connect (false)
 		throw domain_error(error.str());
 	}
 	this->server_addr.sin_family = domain;
-	this->created = true;
 }
 
 ServerSocket::~ServerSocket() noexcept {}
@@ -86,7 +88,7 @@ ServerSocket ServerSocket::accept()
 void ServerSocket::nonblock()
 {
 	int_fast8_t result;
-	result = fcntl(this->socket_fd, O_NONBLOCK);
+	result = fcntl(this->socket_fd, F_SETFL, O_NONBLOCK);
 	if (result < 0) {
 		stringstream error;
 		error << "Server nonblock: " << strerror(errno);
@@ -117,22 +119,27 @@ string ServerSocket::recv()
 {
 	stringstream buffer;
 	char recv_data[PACK_SIZE];
-	int result;
-	do {
-		memset(&recv_data, 0, PACK_SIZE);
-		result = sys_recv(this->socket_fd, recv_data, PACK_SIZE, 0);
+	int result = 1;
+	memset(&recv_data, 0, PACK_SIZE);
+	result = sys_recv(this->socket_fd, recv_data, PACK_SIZE, 0);
+	if (result > 0)
+	{
+		recv_data[PACK_SIZE-1] = '\0';
 		buffer << recv_data;
-	} while (result > 0);
-	if (result < 0 || buffer.str().length() == 0)
+	}
+	if (result < 0 && errno != 0)
 	{
 		stringstream error;
-		error << "Server recv: " << strerror(errno);
+		error << "Server recv: " << strerror(errno) << " | " << errno;
 		throw domain_error(error.str());
 	}
-	else
+	if (result == 0)
 	{
-		return buffer.str();
+		stringstream error;
+		error << "Server recv 0: " << strerror(errno) << " | " << errno;
+		throw domain_error(error.str());
 	}
+	return buffer.str();
 }
 
 string ServerSocket::address()
@@ -170,6 +177,7 @@ void ServerSocket::close()
 
 ServerSocket::operator int() const
 {
+	// cout << this->created << endl;
 	if (this->created)
 	{
 		return this->socket_fd;
